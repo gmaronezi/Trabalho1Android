@@ -1,0 +1,8 @@
+tela inicial - botão para fazer cadastro, botão para ver lista com todos os pontos turisticos
+
+1.tela de cadastro - título, descrição, endereço, latitude, longitude e foto
+
+2.tela de lista - uma lista com todos os pontos turísticos cadastrados, que quando clicado abre a tela de opções do ponto turístico
+
+2.1 tela de opções do ponto turístico - opções de  editar, excluir e ver no mapa o registro selecionado, tendo também a opção de voltar a lista.
+
