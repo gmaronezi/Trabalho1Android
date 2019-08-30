@@ -12,14 +12,8 @@
         android:layout_width="244dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|center_horizontal"
-        android:text="Cadastrar Destino" />
-
-    <Button
-        android:id="@+id/btVerMapa"
-        android:layout_width="244dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|center_horizontal"
-        android:text="Mapa" />
+        android:text="Cadastrar Destino"
+        android:onClick="btCadastrarOnClick"/>
 
     <Button
         android:id="@+id/btVerPontosTuristicos"
