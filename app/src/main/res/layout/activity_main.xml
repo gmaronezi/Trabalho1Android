@@ -11,7 +11,7 @@
         android:id="@+id/btCadastrar"
         android:layout_width="244dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="256dp"
+        android:layout_marginTop="264dp"
         android:onClick="btCadastrarOnClick"
         android:text="Cadastrar Destino"
         app:layout_constraintEnd_toEndOf="parent"
