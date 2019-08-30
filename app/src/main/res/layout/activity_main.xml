@@ -4,11 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
+    <Button
+        android:id="@+id/btCadastrar"
+        android:layout_width="244dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:text="Cadastrar Destino" />
+
+    <Button
+        android:id="@+id/btVerMapa"
+        android:layout_width="244dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:text="Mapa" />
+
+    <Button
+        android:id="@+id/btVerPontosTuristicos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:text="Visualizar Pontos Turísticos" />
 
 </LinearLayout>
