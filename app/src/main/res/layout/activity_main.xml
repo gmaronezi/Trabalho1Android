@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,15 +11,25 @@
         android:id="@+id/btCadastrar"
         android:layout_width="244dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|center_horizontal"
+        android:layout_marginTop="256dp"
+        android:onClick="btCadastrarOnClick"
         android:text="Cadastrar Destino"
-        android:onClick="btCadastrarOnClick"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/btVerPontosTuristicos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|center_horizontal"
-        android:text="Visualizar Pontos Turísticos" />
+        android:layout_marginBottom="340dp"
+        android:text="Visualizar Pontos Turísticos"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints" />
 
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>
