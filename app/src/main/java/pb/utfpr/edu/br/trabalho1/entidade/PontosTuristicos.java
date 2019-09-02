@@ -4,6 +4,8 @@ public class PontosTuristicos {
     private int _id;
     private String titulo;
     private String descricao;
+    private String estado;
+    private String cidade;
     private String endereco;
     private Double latitude;
     private Double longitude;
@@ -54,5 +56,26 @@ public class PontosTuristicos {
 
     public void setLongitude(Double longitude) {
         this.longitude = longitude;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    @Override
+    public String toString() {
+        return titulo;
     }
 }

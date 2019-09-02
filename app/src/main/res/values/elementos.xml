@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="elementos_spinner">
+        <item>Paraná</item>
+        <item>Santa Catarina</item>
+        <item>Rio Grande do Sul</item>
+        <item>São Paulo</item>
+    </string-array>
+</resources>
