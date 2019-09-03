@@ -17,7 +17,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL( "CREATE TABLE IF NOT EXISTS pontoTuristico ( _id INTEGER PRIMARY KEY, titulo TEXT, " +
-                "descricao TEXT, endereco TEXT, latitude REAL, longitude REAL, estado TEXT, cidade TEXT)");
+                "descricao TEXT, endereco TEXT, latitude REAL, longitude REAL)");
 
     }
 
@@ -76,8 +76,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             pt.setTitulo(registro.getString(registro.getColumnIndex("titulo")));
             pt.setDescricao(registro.getString(registro.getColumnIndex("descricao")));
             pt.setEndereco(registro.getString(registro.getColumnIndex("endereco")));
-            pt.setEstado(registro.getString(registro.getColumnIndex("estado")));
-            pt.setCidade(registro.getString(registro.getColumnIndex("cidade")));
             pt.setLatitude(registro.getDouble(registro.getColumnIndex("latitude")));
             pt.setLongitude(registro.getDouble(registro.getColumnIndex("longitude")));
             return pt;
