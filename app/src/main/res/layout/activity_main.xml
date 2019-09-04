@@ -22,6 +22,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
+    //teste commit
     <Button
         android:id="@+id/btVerPontosTuristicos"
         android:layout_width="251dp"
