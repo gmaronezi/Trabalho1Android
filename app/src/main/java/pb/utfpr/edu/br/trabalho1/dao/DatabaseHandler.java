@@ -11,7 +11,7 @@ import pb.utfpr.edu.br.trabalho1.entidade.PontosTuristicos;
 public class DatabaseHandler extends SQLiteOpenHelper {
 
     public DatabaseHandler(Context c ) {
-        super( c, "bd", null, 1 );
+        super( c, "bd", null, 3 );
     }
 
     @Override
@@ -49,8 +49,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         registro.put("endereco",pt.getEndereco());
         registro.put("latitude", pt.getLatitude());
         registro.put("longitude",pt.getLongitude());
-        registro.put("estado",pt.getEstado());
-        registro.put("cidade",pt.getCidade());
 
         bd.update( "pontoTuristico", registro, "_id = " + pt.get_id(),
                 null );

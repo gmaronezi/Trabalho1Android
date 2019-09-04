@@ -9,9 +9,11 @@
 
     <Button
         android:id="@+id/btCadastrar"
-        android:layout_width="244dp"
-        android:layout_height="wrap_content"
+        android:layout_width="251dp"
+        android:layout_height="50dp"
         android:layout_marginTop="264dp"
+        android:textColor="#FFFFFF"
+        android:background="#D81B60"
         android:onClick="btCadastrarOnClick"
         android:text="Cadastrar Ponto Turístico"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,9 +24,12 @@
 
     <Button
         android:id="@+id/btVerPontosTuristicos"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="251dp"
+        android:layout_height="50dp"
         android:layout_marginBottom="340dp"
+        android:textColor="#FFFFFF"
+        android:background="#D81B60"
+        android:onClick="btVisualizarOnClick"
         android:text="Visualizar Pontos Turísticos"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

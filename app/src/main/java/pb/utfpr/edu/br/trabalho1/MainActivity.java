@@ -26,4 +26,8 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i);
     }
 
+    public void btVisualizarOnClick(View view) {
+        Intent i = new Intent(this, ListarActivity.class);
+        startActivity(i);
+    }
 }

@@ -100,13 +100,21 @@ public class CadastroActivity extends AppCompatActivity implements LocationListe
 
     public void btIncluirOnClick(View view) {
         PontosTuristicos pt = new PontosTuristicos();
-        pt.setTitulo( etTitulo.getText().toString() );
-        pt.setDescricao( etDescricao.getText().toString() );
-        pt.setLatitude(Double.parseDouble(tvLatitude.getText().toString()));
-        pt.setLongitude(Double.parseDouble(tvLongitude.getText().toString()));
-        dao.incluir( pt );
+        try {
+            pt.setTitulo( etTitulo.getText().toString() );
+            pt.setDescricao( etDescricao.getText().toString() );
+            pt.setEndereco(tvEndereco.getText().toString());
+            pt.setLatitude(Double.parseDouble(tvLatitude.getText().toString()));
+            pt.setLongitude(Double.parseDouble(tvLongitude.getText().toString()));
+            dao.incluir( pt );
+        } catch(Exception ex){
+            Toast.makeText( this, "Erro ao inserir", Toast.LENGTH_LONG ).show();
+        } finally {
+            Toast.makeText( this, "Registro inserido com sucesso!!!", Toast.LENGTH_LONG ).show();
 
-        Toast.makeText( this, "Registro inserido com sucesso!!!", Toast.LENGTH_LONG ).show();
+            Intent i = new Intent(this, ListarActivity.class);
+            startActivity(i);
+        }
     }
 
     @Override
