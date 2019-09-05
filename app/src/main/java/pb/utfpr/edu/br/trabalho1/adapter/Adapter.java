@@ -1,6 +1,7 @@
 package pb.utfpr.edu.br.trabalho1.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import pb.utfpr.edu.br.trabalho1.AlterarActivity;
+import pb.utfpr.edu.br.trabalho1.CadastroActivity;
+import pb.utfpr.edu.br.trabalho1.ListarActivity;
 import pb.utfpr.edu.br.trabalho1.R;
 
 public class Adapter extends BaseAdapter {
@@ -65,14 +69,16 @@ public class Adapter extends BaseAdapter {
         tvDescricaoLista.setText( descricao );
         tvEndereco.setText( endereco );
 
-        btEditarLista.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText( c,
-                        "Elemento "+ cod, Toast.LENGTH_LONG ).show();
-            }
-        });
+
+//        btEditarLista.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText( c,
+//                        "Elemento "+ cod, Toast.LENGTH_LONG ).show();
+//            }
+//        });
 
         return v;
     }
+
 }

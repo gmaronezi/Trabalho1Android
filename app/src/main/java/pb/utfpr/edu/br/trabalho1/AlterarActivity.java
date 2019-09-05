@@ -5,59 +5,61 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-
 import android.widget.EditText;
-
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
-
 import java.util.List;
 import java.util.Locale;
 
 import pb.utfpr.edu.br.trabalho1.dao.DatabaseHandler;
 import pb.utfpr.edu.br.trabalho1.entidade.PontosTuristicos;
 
-public class CadastroActivity extends AppCompatActivity implements LocationListener {
+public class AlterarActivity extends AppCompatActivity implements LocationListener {
 
-    private EditText etTitulo;
-    private EditText etDescricao;
-    private TextView tvEndereco;
-    private TextView tvLatitude;
-    private TextView tvLongitude;
+    private EditText etTituloAlterar;
+    private EditText etDescricaoAlterar;
+    private TextView tvEnderecoAlterar;
+    private TextView tvLatitudeAlterar;
+    private TextView tvLongitudeAlterar;
     private Double latitude = 0.00;
     private Double longitude = 0.00;
 
     private DatabaseHandler dao;
 
+    private PontosTuristicos pontoT;
+    Cursor registros;
+    Long id_ponto;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cadastro_activity);
+        setContentView(R.layout.activity_alterar);
 
-        etTitulo = findViewById(R.id.etTitulo);
-        etDescricao = findViewById(R.id.etDescricao);
-        tvEndereco = findViewById(R.id.tvEndereco);
-        tvLatitude = findViewById(R.id.tvLatitude);
-        tvLongitude = findViewById(R.id.tvLongitude);
+        etTituloAlterar = findViewById(R.id.etTituloAlterar);
+        etDescricaoAlterar = findViewById(R.id.etDescricaoAlterar);
+        tvEnderecoAlterar = findViewById(R.id.tvEnderecoAlterar);
+        tvLatitudeAlterar = findViewById(R.id.tvLatitudeAlterar);
+        tvLongitudeAlterar = findViewById(R.id.tvLongitudeAlterar);
+
+        Intent i = getIntent();
 
         ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_FINE_LOCATION},1);
 
         LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
@@ -89,42 +91,33 @@ public class CadastroActivity extends AppCompatActivity implements LocationListe
 
         }
 
-        lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 2000, 0, this);
+        lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 2000, 0, (LocationListener) this);
 
         ActivityCompat.requestPermissions( this,
                 new String[] { Manifest.permission.ACCESS_FINE_LOCATION }, 1 );
 
         dao = new DatabaseHandler( this );
 
-    }
 
-    public void btIncluirOnClick(View view) {
-        PontosTuristicos pt = new PontosTuristicos();
-        try {
-            pt.setTitulo( etTitulo.getText().toString() );
-            pt.setDescricao( etDescricao.getText().toString() );
-            pt.setEndereco(tvEndereco.getText().toString());
-            pt.setLatitude(Double.parseDouble(tvLatitude.getText().toString()));
-            pt.setLongitude(Double.parseDouble(tvLongitude.getText().toString()));
-            dao.incluir( pt );
-        } catch(Exception ex){
-            Toast.makeText( this, "Erro ao inserir", Toast.LENGTH_LONG ).show();
-        } finally {
-            Toast.makeText( this, "Registro inserido com sucesso!!!", Toast.LENGTH_LONG ).show();
-
-            Intent i = new Intent(this, ListarActivity.class);
-            startActivity(i);
+        if(i != null){
+            Bundle params = i.getExtras();
+            if(params != null){
+                id_ponto = params.getLong("id");
+                dao.pesquisar(String.valueOf(id_ponto));
+            }
         }
+
+        setaDadosTela();
     }
 
     @Override
     public void onLocationChanged(Location location) {
 
-         latitude = location.getLatitude();
-         longitude = location.getLongitude();
+        latitude = location.getLatitude();
+        longitude = location.getLongitude();
 
-        tvLatitude.setText( String.valueOf( latitude ) );
-        tvLongitude.setText( String.valueOf( longitude ) );
+//        tvLatitudeAlterar.setText( String.valueOf( latitude ) );
+//        tvLongitudeAlterar.setText( String.valueOf( longitude ) );
 
     }
 
@@ -143,8 +136,32 @@ public class CadastroActivity extends AppCompatActivity implements LocationListe
 
     }
 
+    public void btAlterarOnclick(View view) {
+        //PontosTuristicos pt = new PontosTuristicos();
 
-    public void btPegarLocalizacaoOnClick(View view) {
+        pontoT = dao.pesquisar(String.valueOf(id_ponto));
+        try {
+        pontoT.setTitulo(etTituloAlterar.getText().toString());
+        pontoT.setDescricao(etDescricaoAlterar.getText().toString());
+        pontoT.setEndereco(tvEnderecoAlterar.getText().toString());
+        pontoT.setLatitude(Double.parseDouble(tvLatitudeAlterar.getText().toString()));
+        pontoT.setLongitude(Double.parseDouble(tvLongitudeAlterar.getText().toString()));
+
+        dao.alterar(pontoT);
+
+        } catch(Exception ex){
+            Toast.makeText( this, "Erro ao alterar", Toast.LENGTH_LONG ).show();
+        } finally {
+            Toast.makeText( this, "Registro alterado com sucesso!!!", Toast.LENGTH_LONG ).show();
+
+            Intent i = new Intent(this, ListarActivity.class);
+            startActivity(i);
+        }
+
+    }
+
+    public void btPegarLocalizacaoAlterarOnClick(View view) {
+
         Geocoder geocoder;
         List<Address> addresses;
         geocoder = new Geocoder(this, Locale.getDefault());
@@ -161,13 +178,22 @@ public class CadastroActivity extends AppCompatActivity implements LocationListe
             String postalCode = addresses.get(0).getPostalCode();
             String knownName = addresses.get(0).getFeatureName(); // Only if available else return NULL
 
-            tvLatitude.setText( String.valueOf( latitude ) );
-            tvLongitude.setText( String.valueOf( longitude ));
-            tvEndereco.setText(address);
+            tvLatitudeAlterar.setText( String.valueOf( latitude ) );
+            tvLongitudeAlterar.setText( String.valueOf( longitude ));
+            tvEnderecoAlterar.setText(address);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
+    public void setaDadosTela(){
+
+       pontoT = dao.pesquisar(String.valueOf(id_ponto));
+
+        etTituloAlterar.setText(pontoT.getTitulo());
+        etDescricaoAlterar.setText(pontoT.getDescricao());
+        tvEnderecoAlterar.setText(pontoT.getEndereco());
+        tvLatitudeAlterar.setText(pontoT.getLatitude().toString());
+        tvLongitudeAlterar.setText(pontoT.getLongitude().toString());
+    }
 }

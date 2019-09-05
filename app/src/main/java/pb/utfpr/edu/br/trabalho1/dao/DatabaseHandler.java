@@ -11,7 +11,7 @@ import pb.utfpr.edu.br.trabalho1.entidade.PontosTuristicos;
 public class DatabaseHandler extends SQLiteOpenHelper {
 
     public DatabaseHandler(Context c ) {
-        super( c, "bd", null, 3 );
+        super( c, "bd", null, 4 );
     }
 
     @Override
@@ -61,16 +61,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         bd.delete( "pontoTuristico", "_id = " + cod, null );
     }
 
-    public PontosTuristicos pesquisar( int cod ) {
+    public PontosTuristicos pesquisar( String cod ) {
         SQLiteDatabase bd = this.getWritableDatabase();
 
         Cursor registro = bd.query( "pontoTuristico", null,
-                "_id = " + cod, null, null,
+                "_id = " + Integer.parseInt(cod), null, null,
                 null, null );
 
         if ( registro.moveToNext() ) {
             PontosTuristicos pt = new PontosTuristicos();
-            pt.set_id( cod );
+            pt.set_id( Integer.parseInt(cod) );
             pt.setTitulo(registro.getString(registro.getColumnIndex("titulo")));
             pt.setDescricao(registro.getString(registro.getColumnIndex("descricao")));
             pt.setEndereco(registro.getString(registro.getColumnIndex("endereco")));
@@ -91,4 +91,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         return registros;
     }
+
+//    public Cursor listarWhere(int id){
+//        SQLiteDatabase bd = this.getWritableDatabase();
+//
+//        String sql = "SELECT * FROM pontoTuristico WHERE _id = ?";
+//
+//        Cursor registros = bd.rawQuery(sql, new String[] {String.valueOf(id)});
+//
+//        return registros.po;
+//    }
+
 }
