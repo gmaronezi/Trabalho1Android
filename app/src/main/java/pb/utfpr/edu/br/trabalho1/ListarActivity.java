@@ -33,10 +33,7 @@ public class ListarActivity extends AppCompatActivity implements AdapterView.OnI
 
         btEditarLista = findViewById(R.id.btEditarLista);
 
-
         registros = dao.listar();
-
-        //ListView lvRegistros = new ListView( this );
 
         lvRegistros = (ListView) findViewById(R.id.lvLista);
 
@@ -46,19 +43,8 @@ public class ListarActivity extends AppCompatActivity implements AdapterView.OnI
 
         lvRegistros.setOnItemClickListener(this);
 
-//        btEditarLista.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                teste = registros.getInt(registros.getColumnIndex("_id"));
-//            }
-//        });
 
-//        AlertDialog.Builder alerta = new AlertDialog.Builder( this );
-//        alerta.setTitle( "Registros" );
-//        alerta.setView( lvRegistros );
-//        alerta.setCancelable( false );
-//        alerta.setNeutralButton( "Ok", null );
-//        alerta.show();
+
     }
 
     @Override
@@ -72,11 +58,32 @@ public class ListarActivity extends AppCompatActivity implements AdapterView.OnI
         startActivity(i);
     }
 
-
     public void btEditarOnClick(View view) {
         teste = adapter.getItemId(lvRegistros.getPositionForView(view));
         i = new Intent(this, AlterarActivity.class);
         i.putExtra("id", teste);
         startActivity(i);
+    }
+
+    public void btVerMapaOnClick(View view) {
+        teste = adapter.getItemId(lvRegistros.getPositionForView(view));
+        Intent intent = new Intent(this, MapsActivity.class);
+        intent.putExtra("id",teste);
+        startActivity(intent);
+    }
+
+    public void btExcluirOnclick(View view) {
+        try{
+            teste = adapter.getItemId(lvRegistros.getPositionForView(view));
+            dao.excluir(String.valueOf(teste));
+        }
+        catch(Exception ex){
+            Toast.makeText( this, "Erro ao excluir", Toast.LENGTH_LONG ).show();
+        } finally {
+            Toast.makeText( this, "Registro excluído com sucesso!!!", Toast.LENGTH_LONG ).show();
+
+            Intent listar = new Intent(this, ListarActivity.class);
+            startActivity(listar);
+        }
     }
 }

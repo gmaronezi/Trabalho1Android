@@ -38,21 +38,43 @@
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btEditarLista"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#FFFFFF"
-        android:background="#D81B60"
-        android:onClick="btEditarOnClick"
-        android:text="Editar" />
+        android:orientation="horizontal" >
 
-    <Button
-        android:id="@+id/btVerMapa"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#FFFFFF"
-        android:background="#D81B60"
-        android:text="Ver no mapa" />
+        <Button
+            android:id="@+id/btEditarLista"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:background="#D81B60"
+            android:onClick="btEditarOnClick"
+            android:layout_marginRight="40dip"
+            android:layout_marginLeft="6dip"
+            android:text="Editar" />
+
+        <Button
+            android:id="@+id/btExcluir"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:background="#D81B60"
+            android:onClick="btExcluirOnclick"
+            android:layout_marginRight="40dip"
+            android:text="Excluir" />
+
+
+        <Button
+            android:id="@+id/btVerMapa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:background="#D81B60"
+            android:onClick="btVerMapaOnClick"
+            android:text="Ver no mapa" />
+    </LinearLayout>
+
+
 
 </LinearLayout>

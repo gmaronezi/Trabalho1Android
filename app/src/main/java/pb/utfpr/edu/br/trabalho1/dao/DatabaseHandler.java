@@ -54,11 +54,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 null );
     }
 
-    public void excluir( int cod ) {
+    public void excluir( String cod ) {
         SQLiteDatabase bd = this.getWritableDatabase();
 
-        bd.delete( "pontoTuristico", "_id = " + cod, null );
-        bd.delete( "pontoTuristico", "_id = " + cod, null );
+        bd.delete( "pontoTuristico", "_id = " + Integer.parseInt(cod), null );
     }
 
     public PontosTuristicos pesquisar( String cod ) {

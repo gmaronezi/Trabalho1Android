@@ -1,5 +1,6 @@
 package pb.utfpr.edu.br.trabalho1;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
@@ -10,6 +11,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import pb.utfpr.edu.br.trabalho1.dao.DatabaseHandler;
 import pb.utfpr.edu.br.trabalho1.entidade.PontosTuristicos;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -17,9 +19,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     private PontosTuristicos pontoT;
 
+    private DatabaseHandler dao;
+    Long id_ponto;
+
     public MapsActivity(GoogleMap mMap, PontosTuristicos pontoT) {
         this.mMap = mMap;
         this.pontoT = pontoT;
+    }
+
+    public MapsActivity() {
+
     }
 
     @Override
@@ -30,6 +39,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        dao = new DatabaseHandler( this );
+
+        Intent i = getIntent();
+        if(i != null){
+            Bundle params = i.getExtras();
+            if(params != null){
+                id_ponto = params.getLong("id");
+                dao.pesquisar(String.valueOf(id_ponto));
+            }
+        }
+
+        pontoT = dao.pesquisar(String.valueOf(id_ponto));
     }
 
 
