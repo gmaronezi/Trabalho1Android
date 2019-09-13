@@ -7,6 +7,7 @@ public class PontosTuristicos {
     private String endereco;
     private Double latitude;
     private Double longitude;
+    private String imagem;
 
     public int get_id() {
         return _id;
@@ -56,4 +57,11 @@ public class PontosTuristicos {
         this.longitude = longitude;
     }
 
+    public String getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
+    }
 }

@@ -5,12 +5,16 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 
+import android.net.Uri;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
@@ -20,9 +24,11 @@ import android.view.View;
 
 import android.widget.EditText;
 
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
 import java.io.IOException;
 
 import java.util.List;
@@ -40,8 +46,12 @@ public class CadastroActivity extends AppCompatActivity implements LocationListe
     private TextView tvLongitude;
     private Double latitude = 0.00;
     private Double longitude = 0.00;
-
+    private String caminhoDaImagem;
     private DatabaseHandler dao;
+
+    private ImageView ivFoto;
+
+    private Uri uri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +105,8 @@ public class CadastroActivity extends AppCompatActivity implements LocationListe
                 new String[] { Manifest.permission.ACCESS_FINE_LOCATION }, 1 );
 
         dao = new DatabaseHandler( this );
+
+        ivFoto = findViewById(R.id.ivFoto);
 
     }
 
@@ -170,4 +182,28 @@ public class CadastroActivity extends AppCompatActivity implements LocationListe
 
     }
 
+    public void btTirarFotoOnClick(View view) {
+        File diretorio = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+        File imagem = new File(diretorio.getPath() + "/" + System.currentTimeMillis() + ".jpg");
+        uri  = Uri.fromFile(imagem);
+
+        Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+       // intentCamera.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+        startActivityForResult(intentCamera, 1);
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1) {
+            if (resultCode == RESULT_OK) {
+
+                Bitmap foto = (Bitmap) data.getExtras().get("data");
+                ivFoto.setImageBitmap(foto);
+
+                Intent novaIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri);
+                sendBroadcast(novaIntent);
+
+                caminhoDaImagem = uri.getPath();
+            }
+        }
+    }
 }
