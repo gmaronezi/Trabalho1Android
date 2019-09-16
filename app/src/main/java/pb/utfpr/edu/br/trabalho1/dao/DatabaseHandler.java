@@ -11,13 +11,13 @@ import pb.utfpr.edu.br.trabalho1.entidade.PontosTuristicos;
 public class DatabaseHandler extends SQLiteOpenHelper {
 
     public DatabaseHandler(Context c ) {
-        super( c, "bd", null, 4 );
+        super( c, "bd", null, 5 );
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL( "CREATE TABLE IF NOT EXISTS pontoTuristico ( _id INTEGER PRIMARY KEY, titulo TEXT, " +
-                "descricao TEXT, endereco TEXT, latitude REAL, longitude REAL)");
+                "descricao TEXT, endereco TEXT, latitude REAL, longitude REAL, imagem TEXT)");
 
     }
 
@@ -36,6 +36,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         registro.put("endereco",pt.getEndereco());
         registro.put("latitude", pt.getLatitude());
         registro.put("longitude",pt.getLongitude());
+        registro.put("imagem", pt.getImagem());
 
         bd.insert("pontoTuristico", null, registro);
     }
@@ -75,6 +76,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             pt.setEndereco(registro.getString(registro.getColumnIndex("endereco")));
             pt.setLatitude(registro.getDouble(registro.getColumnIndex("latitude")));
             pt.setLongitude(registro.getDouble(registro.getColumnIndex("longitude")));
+            pt.setImagem(registro.getString(registro.getColumnIndex("imagem")));
             return pt;
         } else {
             return null;

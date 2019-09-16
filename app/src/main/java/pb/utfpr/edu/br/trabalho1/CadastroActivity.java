@@ -118,6 +118,7 @@ public class CadastroActivity extends AppCompatActivity implements LocationListe
             pt.setEndereco(tvEndereco.getText().toString());
             pt.setLatitude(Double.parseDouble(tvLatitude.getText().toString()));
             pt.setLongitude(Double.parseDouble(tvLongitude.getText().toString()));
+            pt.setImagem(caminhoDaImagem);
             dao.incluir( pt );
         } catch(Exception ex){
             Toast.makeText( this, "Erro ao inserir", Toast.LENGTH_LONG ).show();
@@ -183,8 +184,8 @@ public class CadastroActivity extends AppCompatActivity implements LocationListe
     }
 
     public void btTirarFotoOnClick(View view) {
-        File diretorio = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-        File imagem = new File(diretorio.getPath() + "/" + System.currentTimeMillis() + ".jpg");
+        String diretorio = "/Armazenamento Interno/DCIM/Camera/";
+        File imagem = new File(diretorio + System.currentTimeMillis() + ".jpg");
         uri  = Uri.fromFile(imagem);
 
         Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);

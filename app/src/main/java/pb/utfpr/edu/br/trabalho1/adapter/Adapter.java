@@ -3,13 +3,19 @@ package pb.utfpr.edu.br.trabalho1.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.File;
 
 import pb.utfpr.edu.br.trabalho1.AlterarActivity;
 import pb.utfpr.edu.br.trabalho1.CadastroActivity;
@@ -56,6 +62,7 @@ public class Adapter extends BaseAdapter {
         TextView tvTituloLista = v.findViewById( R.id.tvTituloLista );
         TextView tvDescricaoLista = v.findViewById( R.id.tvDescricaoLista );
         TextView tvEndereco = v.findViewById( R.id.tvEnderecoLista );
+        ImageView ivFoto = v.findViewById(R.id.ivFotoListar);
         Button btEditarLista = v.findViewById( R.id.btEditarLista );
 
         registros.moveToPosition( position );
@@ -64,10 +71,23 @@ public class Adapter extends BaseAdapter {
         String titulo = registros.getString( registros.getColumnIndex( "titulo" ) );
         String descricao = registros.getString( registros.getColumnIndex( "descricao" ) );
         String endereco = registros.getString( registros.getColumnIndex( "endereco" ) );
+        String foto = registros.getString(registros.getColumnIndex("imagem"));
 
         tvTituloLista.setText( titulo );
         tvDescricaoLista.setText( descricao );
         tvEndereco.setText( endereco );
+
+        if(foto != null){
+            File imgFile = new  File("/Armazenamento Interno/DCIM/Camera/IMG_20190825_205338.jpg");
+
+           // if(imgFile.exists()){
+
+                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+
+                ivFoto.setImageBitmap(myBitmap);
+
+           // }
+        }
 
 
 //        btEditarLista.setOnClickListener(new View.OnClickListener() {

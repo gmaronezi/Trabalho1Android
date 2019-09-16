@@ -6,11 +6,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
@@ -18,9 +22,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
@@ -42,6 +48,10 @@ public class AlterarActivity extends AppCompatActivity implements LocationListen
 
     private PontosTuristicos pontoT;
     Long id_ponto;
+
+    private ImageView ivFoto;
+
+    private Uri uri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,6 +116,8 @@ public class AlterarActivity extends AppCompatActivity implements LocationListen
             }
         }
 
+        ivFoto = findViewById(R.id.ivFotoAlterar);
+
         setaDadosTela();
     }
 
@@ -134,6 +146,26 @@ public class AlterarActivity extends AppCompatActivity implements LocationListen
     public void onProviderDisabled(String provider) {
 
     }
+
+//    @Override
+//    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
+//        // TODO Auto-generated method stub
+//        super.onActivityResult(requestCode, resultCode, data);
+//
+//            Uri selectedImage = data.getData();
+//            String[] filePathColumn = { MediaStore.Images.Media.DATA };
+//
+//            Cursor cursor = getContentResolver().query(selectedImage,
+//                    filePathColumn, null, null, null);
+//            cursor.moveToFirst();
+//
+//            int columnIndex = cursor.getColumnIndex(pontoT.getImagem().toString());
+//            String picturePath = cursor.getString(columnIndex);
+//            cursor.close();
+//
+//            ivFoto.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+//
+//    }
 
     public void btAlterarOnclick(View view) {
         //PontosTuristicos pt = new PontosTuristicos();
@@ -188,5 +220,11 @@ public class AlterarActivity extends AppCompatActivity implements LocationListen
         tvEnderecoAlterar.setText(pontoT.getEndereco());
         tvLatitudeAlterar.setText(pontoT.getLatitude().toString());
         tvLongitudeAlterar.setText(pontoT.getLongitude().toString());
+
+//        Intent intent = new Intent();
+//        intent.setAction(Intent.ACTION_VIEW);
+//        intent.setDataAndType(Uri.parse("file:/" + pontoT.getImagem()), "image/*");
+//        startActivity(intent);
+
     }
 }
