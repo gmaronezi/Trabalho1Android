@@ -11,7 +11,7 @@ import pb.utfpr.edu.br.trabalho1.entidade.PontosTuristicos;
 public class DatabaseHandler extends SQLiteOpenHelper {
 
     public DatabaseHandler(Context c ) {
-        super( c, "bd", null, 5 );
+        super( c, "bd", null, 6 );
     }
 
     @Override
@@ -45,11 +45,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase bd = this.getWritableDatabase();
 
         ContentValues registro = new ContentValues();
-        registro.put("titulo",pt.getTitulo());
+    registro.put("titulo",pt.getTitulo());
         registro.put("descricao", pt.getDescricao());
         registro.put("endereco",pt.getEndereco());
         registro.put("latitude", pt.getLatitude());
         registro.put("longitude",pt.getLongitude());
+        registro.put("imagem",pt.getImagem());
 
         bd.update( "pontoTuristico", registro, "_id = " + pt.get_id(),
                 null );

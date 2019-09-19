@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Environment;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,7 +64,7 @@ public class Adapter extends BaseAdapter {
         TextView tvTituloLista = v.findViewById( R.id.tvTituloLista );
         TextView tvDescricaoLista = v.findViewById( R.id.tvDescricaoLista );
         TextView tvEndereco = v.findViewById( R.id.tvEnderecoLista );
-        ImageView ivFoto = v.findViewById(R.id.ivFotoListar);
+        ImageView ivFoto =  (ImageView) v.findViewById(R.id.ivFotoListar);
         Button btEditarLista = v.findViewById( R.id.btEditarLista );
 
         registros.moveToPosition( position );
@@ -78,27 +80,36 @@ public class Adapter extends BaseAdapter {
         tvEndereco.setText( endereco );
 
         if(foto != null){
-            File imgFile = new  File("/Armazenamento Interno/DCIM/Camera/IMG_20190825_205338.jpg");
-
-           // if(imgFile.exists()){
-
-                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-
-                ivFoto.setImageBitmap(myBitmap);
-
-           // }
+            Bitmap bitmap = convertToBitmap(foto);
+            ivFoto.setImageBitmap(bitmap);
         }
 
-
-//        btEditarLista.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText( c,
-//                        "Elemento "+ cod, Toast.LENGTH_LONG ).show();
+//        if(foto != null){
+//            File imgFile = new  File("/storage/emulated/0/DCIM/Camera/IMG_20190825_205338.jpg");
+//
+//           if(imgFile.exists()){
+//
+////               Uri imgUri = Uri.parse(
+////                       "/storage/emulated/0/DCIM/Camera/IMG_20190825_205338.jpg" );
+////               ivFoto.setImageURI(imgUri);
+//                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+//
+//                ivFoto.setImageBitmap(myBitmap);
 //            }
-//        });
+//        }
+
 
         return v;
+    }
+
+    public static Bitmap convertToBitmap(String base64Str) throws IllegalArgumentException
+    {
+        byte[] decodedBytes = Base64.decode(
+                base64Str.substring(base64Str.indexOf(",")  + 1),
+                Base64.DEFAULT
+        );
+
+        return BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
     }
 
 }

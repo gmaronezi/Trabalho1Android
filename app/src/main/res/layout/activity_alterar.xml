@@ -80,6 +80,16 @@
             android:layout_gravity="center"
             android:onClick="btPegarLocalizacaoAlterarOnClick"/>
 
+        <Button
+            android:layout_width="167dp"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:background="@color/colorAccent"
+            android:text="Tirar Foto"
+            android:layout_margin="6dip"
+            android:layout_gravity="center"
+            android:onClick="btTirarFotoOnClick"/>
+
     </LinearLayout>
 
     <Button

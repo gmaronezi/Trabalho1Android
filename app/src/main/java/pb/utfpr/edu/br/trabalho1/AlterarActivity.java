@@ -20,12 +20,14 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -52,6 +54,7 @@ public class AlterarActivity extends AppCompatActivity implements LocationListen
     private ImageView ivFoto;
 
     private Uri uri;
+    Bitmap bitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -178,6 +181,11 @@ public class AlterarActivity extends AppCompatActivity implements LocationListen
         pontoT.setLatitude(Double.parseDouble(tvLatitudeAlterar.getText().toString()));
         pontoT.setLongitude(Double.parseDouble(tvLongitudeAlterar.getText().toString()));
 
+        if(bitmap != null){
+            String base64String = convertToBase64(bitmap);
+            pontoT.setImagem(base64String);
+        }
+
         dao.alterar(pontoT);
 
         } catch(Exception ex){
@@ -221,10 +229,52 @@ public class AlterarActivity extends AppCompatActivity implements LocationListen
         tvLatitudeAlterar.setText(pontoT.getLatitude().toString());
         tvLongitudeAlterar.setText(pontoT.getLongitude().toString());
 
+        if(pontoT.getImagem() != null){
+            bitmap = convertToBitmap(pontoT.getImagem());
+            ivFoto.setImageBitmap(bitmap);
+        }
+
 //        Intent intent = new Intent();
 //        intent.setAction(Intent.ACTION_VIEW);
 //        intent.setDataAndType(Uri.parse("file:/" + pontoT.getImagem()), "image/*");
 //        startActivity(intent);
 
+    }
+
+    public void btTirarFotoOnClick(View view) {
+        Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intentCamera, 1);
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1) {
+            if (resultCode == RESULT_OK) {
+
+                bitmap = (Bitmap) data.getExtras().get("data");
+                ivFoto.setImageBitmap(bitmap);
+
+                Intent novaIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri);
+                sendBroadcast(novaIntent);
+
+            }
+        }
+    }
+
+    public static Bitmap convertToBitmap(String base64Str) throws IllegalArgumentException
+    {
+        byte[] decodedBytes = Base64.decode(
+                base64Str.substring(base64Str.indexOf(",")  + 1),
+                Base64.DEFAULT
+        );
+
+        return BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
+    }
+
+    public static String convertToBase64(Bitmap bitmap)
+    {
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
+
+        return Base64.encodeToString(outputStream.toByteArray(), Base64.DEFAULT);
     }
 }

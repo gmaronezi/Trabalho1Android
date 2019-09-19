@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -20,6 +21,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.View;
 
 import android.widget.EditText;
@@ -28,6 +30,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 
@@ -48,6 +51,7 @@ public class CadastroActivity extends AppCompatActivity implements LocationListe
     private Double longitude = 0.00;
     private String caminhoDaImagem;
     private DatabaseHandler dao;
+    Bitmap foto;
 
     private ImageView ivFoto;
 
@@ -113,12 +117,19 @@ public class CadastroActivity extends AppCompatActivity implements LocationListe
     public void btIncluirOnClick(View view) {
         PontosTuristicos pt = new PontosTuristicos();
         try {
+
+
             pt.setTitulo( etTitulo.getText().toString() );
             pt.setDescricao( etDescricao.getText().toString() );
             pt.setEndereco(tvEndereco.getText().toString());
             pt.setLatitude(Double.parseDouble(tvLatitude.getText().toString()));
             pt.setLongitude(Double.parseDouble(tvLongitude.getText().toString()));
-            pt.setImagem(caminhoDaImagem);
+
+            if(foto != null){
+                String base64String = convertToBase64(foto);
+                pt.setImagem(base64String);
+            }
+
             dao.incluir( pt );
         } catch(Exception ex){
             Toast.makeText( this, "Erro ao inserir", Toast.LENGTH_LONG ).show();
@@ -163,16 +174,9 @@ public class CadastroActivity extends AppCompatActivity implements LocationListe
         geocoder = new Geocoder(this, Locale.getDefault());
 
         try {
-
-
             addresses = geocoder.getFromLocation(latitude, longitude, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
 
             String address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
-            String city = addresses.get(0).getLocality();
-            String state = addresses.get(0).getAdminArea();
-            String country = addresses.get(0).getCountryName();
-            String postalCode = addresses.get(0).getPostalCode();
-            String knownName = addresses.get(0).getFeatureName(); // Only if available else return NULL
 
             tvLatitude.setText( String.valueOf( latitude ) );
             tvLongitude.setText( String.valueOf( longitude ));
@@ -184,9 +188,9 @@ public class CadastroActivity extends AppCompatActivity implements LocationListe
     }
 
     public void btTirarFotoOnClick(View view) {
-        String diretorio = "/Armazenamento Interno/DCIM/Camera/";
-        File imagem = new File(diretorio + System.currentTimeMillis() + ".jpg");
-        uri  = Uri.fromFile(imagem);
+//        String diretorio = "/Armazenamento Interno/DCIM/Camera/";
+//        File imagem = new File(diretorio + System.currentTimeMillis() + ".jpg");
+//        uri  = Uri.fromFile(imagem);
 
         Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
        // intentCamera.putExtra(MediaStore.EXTRA_OUTPUT, uri);
@@ -197,14 +201,23 @@ public class CadastroActivity extends AppCompatActivity implements LocationListe
         if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
 
-                Bitmap foto = (Bitmap) data.getExtras().get("data");
+                foto = (Bitmap) data.getExtras().get("data");
                 ivFoto.setImageBitmap(foto);
 
                 Intent novaIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri);
                 sendBroadcast(novaIntent);
 
                 caminhoDaImagem = uri.getPath();
+
             }
         }
+    }
+
+    public static String convertToBase64(Bitmap bitmap)
+    {
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
+
+        return Base64.encodeToString(outputStream.toByteArray(), Base64.DEFAULT);
     }
 }
