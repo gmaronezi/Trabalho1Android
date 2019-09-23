@@ -207,7 +207,7 @@ public class CadastroActivity extends AppCompatActivity implements LocationListe
                 Intent novaIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri);
                 sendBroadcast(novaIntent);
 
-                caminhoDaImagem = uri.getPath();
+//                caminhoDaImagem = uri.getPath();
 
             }
         }
