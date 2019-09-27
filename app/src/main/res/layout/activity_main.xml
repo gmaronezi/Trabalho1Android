@@ -1,41 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:padding="10dp"
+    android:gravity="center">
 
-    <Button
-        android:id="@+id/btCadastrar"
-        android:layout_width="251dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="264dp"
-        android:textColor="#FFFFFF"
-        android:background="#D81B60"
-        android:onClick="btCadastrarOnClick"
-        android:text="Cadastrar Ponto Turístico"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
 
-    //teste commit
-    <Button
-        android:id="@+id/btVerPontosTuristicos"
-        android:layout_width="251dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="340dp"
-        android:textColor="#FFFFFF"
-        android:background="#D81B60"
-        android:onClick="btVisualizarOnClick"
-        android:text="Visualizar Pontos Turísticos"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:gravity="center"
+        android:orientation="vertical">
 
-</android.support.constraint.ConstraintLayout>
+        <android.support.v7.widget.CardView
+            android:layout_width="160dp"
+            android:layout_height="190dp"
+            android:layout_margin="10dp"
+            app:cardUseCompatPadding="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="16dp">
+
+                <ImageView
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/addicon"
+                    android:padding="10dp">
+                </ImageView>
+
+                <Button
+                    android:id="@+id/btCadastrar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#78cacf"
+                    android:onClick="btCadastrarOnClick"
+                    android:gravity="center"
+                    android:text="Novo">
+
+                </Button>
+
+            </LinearLayout>
+
+
+        </android.support.v7.widget.CardView>
+
+
+        <android.support.v7.widget.CardView
+            android:layout_width="160dp"
+            android:layout_height="190dp"
+            android:layout_margin="10dp"
+            app:cardUseCompatPadding="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="16dp">
+
+                <ImageView
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/ic_search_black_24dp"
+                    android:padding="10dp">
+                </ImageView>
+
+                <Button
+                    android:id="@+id/btVerPontosTuristicos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#78cacf"
+                    android:onClick="btVisualizarOnClick"
+                    android:gravity="center"
+                    android:text="Consultar"
+                    >
+
+                </Button>
+
+            </LinearLayout>
+
+
+        </android.support.v7.widget.CardView>
+
+
+
+
+
+    </LinearLayout>
+
+<!--    <Button-->
+<!--        android:id="@+id/btCadastrar"-->
+<!--        android:layout_width="251dp"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:layout_marginTop="264dp"-->
+<!--        android:textColor="#FFFFFF"-->
+<!--        android:background="#D81B60"-->
+<!--        android:onClick="btCadastrarOnClick"-->
+<!--        android:text="Cadastrar Ponto Turístico"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.497"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        tools:ignore="MissingConstraints" />-->
+
+<!--    <Button-->
+<!--        android:id="@+id/btVerPontosTuristicos"-->
+<!--        android:layout_width="251dp"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:layout_marginBottom="340dp"-->
+<!--        android:textColor="#FFFFFF"-->
+<!--        android:background="#D81B60"-->
+<!--        android:onClick="btVisualizarOnClick"-->
+<!--        android:text="Visualizar Pontos Turísticos"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.497"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        tools:ignore="MissingConstraints" />-->
+
+</LinearLayout>

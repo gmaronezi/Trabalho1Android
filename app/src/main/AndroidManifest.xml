@@ -24,6 +24,11 @@
         <activity android:name=".ListarActivity" />
         <activity android:name=".CadastroActivity" />
         <activity android:name=".MainActivity">
+
+        </activity>
+
+        <activity android:name=".SplashActivity"
+            android:theme="@style/AppTheme.NoActionBar.FullScrean">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

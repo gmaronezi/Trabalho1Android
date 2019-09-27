@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -65,7 +66,7 @@ public class Adapter extends BaseAdapter {
         TextView tvDescricaoLista = v.findViewById( R.id.tvDescricaoLista );
         TextView tvEndereco = v.findViewById( R.id.tvEnderecoLista );
         ImageView ivFoto =  (ImageView) v.findViewById(R.id.ivFotoListar);
-        Button btEditarLista = v.findViewById( R.id.btEditarLista );
+        ImageButton btEditarLista = v.findViewById( R.id.btEditarLista );
 
         registros.moveToPosition( position );
 
