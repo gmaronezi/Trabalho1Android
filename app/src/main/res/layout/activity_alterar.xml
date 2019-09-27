@@ -67,12 +67,11 @@
 
         <ImageView
             android:id="@+id/ivFotoAlterar"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:padding="1dp"
-            android:scaleType="centerInside"
-            android:adjustViewBounds="true"
-            android:src="@color/cardview_light_background"/>
+            android:layout_width="164dp"
+            android:layout_height="83dp"
+            android:layout_gravity="center"
+            android:scaleType="center"
+            android:src="@color/cardview_light_background" />
 
     </LinearLayout>
 

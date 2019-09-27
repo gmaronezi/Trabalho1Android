@@ -136,8 +136,7 @@ public class CadastroActivity extends AppCompatActivity implements LocationListe
         } finally {
             Toast.makeText( this, "Registro inserido com sucesso!!!", Toast.LENGTH_LONG ).show();
 
-            Intent i = new Intent(this, ListarActivity.class);
-            startActivity(i);
+            this.finish();
         }
     }
 

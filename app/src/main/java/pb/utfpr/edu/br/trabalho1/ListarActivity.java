@@ -82,8 +82,9 @@ public class ListarActivity extends AppCompatActivity implements AdapterView.OnI
         } finally {
             Toast.makeText( this, "Registro excluído com sucesso!!!", Toast.LENGTH_LONG ).show();
 
-            Intent listar = new Intent(this, ListarActivity.class);
-            startActivity(listar);
+            registros = dao.listar();
+            adapter = new Adapter( this, registros );
+            lvRegistros.setAdapter( adapter );
         }
     }
 }
