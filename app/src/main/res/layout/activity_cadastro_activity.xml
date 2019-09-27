@@ -76,10 +76,6 @@
             android:adjustViewBounds="true"
             android:src="@color/cardview_light_background"/>
 
-
-        android:cropToPadding="true"
-            android:background="#78cacf"
-
     </LinearLayout>
     <Button
         android:layout_width="167dp"
