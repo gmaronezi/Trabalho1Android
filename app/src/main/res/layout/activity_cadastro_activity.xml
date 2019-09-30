@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    tools:context=".CadastroActivity">
+
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="20dp"
-    tools:context=".CadastroActivity">
+    android:padding="20dp">
 
     <TextView
         android:layout_width="wrap_content"
@@ -41,73 +47,86 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/colorAccent"
-        android:text="Latitude:"/>
-
-    <TextView
-        android:id="@+id/tvLatitude"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="0"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/colorAccent"
-        android:text="Longitude:"/>
-
-    <TextView
-        android:id="@+id/tvLongitude"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="0"/>
-
-
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:orientation="vertical">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="3dp">
 
-        <ImageView
-            android:id="@+id/ivFoto"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:src="@color/cardview_light_background" />
-
-        <Button
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#FFFFFF"
-            android:background="@color/colorAccent"
-            android:text="Pegar Localização"
-            android:layout_marginTop="3dip"
-            android:layout_gravity="center"
-            android:onClick="btPegarLocalizacaoOnClick"/>
+            android:layout_marginRight="2dp"
+            android:textColor="@color/colorAccent"
+            android:text="Latitude:"/>
 
-        <Button
-            android:layout_width="371dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="6dip"
-            android:background="@color/colorAccent"
-            android:onClick="btTirarFotoOnClick"
-            android:text="Tirar Foto"
-            android:textColor="#FFFFFF" />
-
-        <Button
+        <TextView
+            android:id="@+id/tvLatitude"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#FFFFFF"
-            android:layout_gravity="center"
-            android:background="@color/colorAccent"
-            android:onClick="btIncluirOnClick"
-            android:text="Incluir" />
+            android:layout_marginRight="15dp"
+            android:text="0"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="2dp"
+            android:textColor="@color/colorAccent"
+            android:text="Longitude:"/>
+
+        <TextView
+            android:id="@+id/tvLongitude"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:text="0"/>
 
     </LinearLayout>
 
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <ImageView
+            android:id="@+id/ivFoto"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:src="@color/cardview_light_background" />
+
+    </LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#FFFFFF"
+        android:background="@color/colorAccent"
+        android:text="Pegar Localização"
+        android:layout_marginTop="3dip"
+        android:layout_gravity="center"
+        android:onClick="btPegarLocalizacaoOnClick"/>
+
+    <Button
+        android:layout_width="371dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="6dip"
+        android:background="@color/colorAccent"
+        android:onClick="btTirarFotoOnClick"
+        android:text="Tirar Foto"
+        android:textColor="#FFFFFF" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#FFFFFF"
+        android:layout_gravity="center"
+        android:background="@color/colorAccent"
+        android:onClick="btIncluirOnClick"
+        android:text="Incluir" />
 
 </LinearLayout>
+</ScrollView>
