@@ -130,13 +130,23 @@ public class CadastroActivity extends AppCompatActivity implements LocationListe
                 pt.setImagem(base64String);
             }
 
-            dao.incluir( pt );
+
+            if(pt.getTitulo().isEmpty()){
+                Toast.makeText( this, "O Título é obrigatório.", Toast.LENGTH_LONG ).show();
+            }else if(pt.getEndereco().isEmpty()){
+                Toast.makeText( this, "O Endereço é obrigatório.\n Utilize o botão Pegar Localização para obter seu endereço.", Toast.LENGTH_LONG ).show();
+            }
+            else if(pt.getImagem().isEmpty()){
+                Toast.makeText( this, "Ter uma imagem é obrigatório.", Toast.LENGTH_LONG ).show();
+            }else{
+                dao.incluir( pt );
+                Toast.makeText( this, "Registro inserido com sucesso!!!", Toast.LENGTH_LONG ).show();
+                this.finish();
+            }
+
+
         } catch(Exception ex){
             Toast.makeText( this, "Erro ao inserir", Toast.LENGTH_LONG ).show();
-        } finally {
-            Toast.makeText( this, "Registro inserido com sucesso!!!", Toast.LENGTH_LONG ).show();
-
-            this.finish();
         }
     }
 
@@ -168,21 +178,26 @@ public class CadastroActivity extends AppCompatActivity implements LocationListe
 
 
     public void btPegarLocalizacaoOnClick(View view) {
-        Geocoder geocoder;
-        List<Address> addresses;
-        geocoder = new Geocoder(this, Locale.getDefault());
+        if(tvLatitude.getText().toString().equals("0") || tvLongitude.getText().toString().equals('0')){
+            Toast.makeText( this, "Latitude ou Longitude inválida", Toast.LENGTH_LONG ).show();
+        }else{
+            Geocoder geocoder;
+            List<Address> addresses;
+            geocoder = new Geocoder(this, Locale.getDefault());
 
-        try {
-            addresses = geocoder.getFromLocation(latitude, longitude, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+            try {
+                addresses = geocoder.getFromLocation(latitude, longitude, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
 
-            String address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
+                String address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
 
-            tvLatitude.setText( String.valueOf( latitude ) );
-            tvLongitude.setText( String.valueOf( longitude ));
-            tvEndereco.setText(address);
-        } catch (IOException e) {
-            e.printStackTrace();
+                tvLatitude.setText( String.valueOf( latitude ) );
+                tvLongitude.setText( String.valueOf( longitude ));
+                tvEndereco.setText(address);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+
     }
 
     public void btTirarFotoOnClick(View view) {

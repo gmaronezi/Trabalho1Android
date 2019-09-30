@@ -149,29 +149,41 @@ public class AlterarActivity extends AppCompatActivity implements LocationListen
 
     public void btAlterarOnclick(View view) {
         //PontosTuristicos pt = new PontosTuristicos();
+        if(tvLatitudeAlterar.getText().toString().equals("0") || tvLongitudeAlterar.getText().toString().equals('0')){
+            Toast.makeText( this, "Latitude ou Longitude inválida", Toast.LENGTH_LONG ).show();
+        }else{
+            pontoT = dao.pesquisar(String.valueOf(id_ponto));
+            try {
+                pontoT.setTitulo(etTituloAlterar.getText().toString());
+                pontoT.setDescricao(etDescricaoAlterar.getText().toString());
+                pontoT.setEndereco(tvEnderecoAlterar.getText().toString());
+                pontoT.setLatitude(Double.parseDouble(tvLatitudeAlterar.getText().toString()));
+                pontoT.setLongitude(Double.parseDouble(tvLongitudeAlterar.getText().toString()));
 
-        pontoT = dao.pesquisar(String.valueOf(id_ponto));
-        try {
-        pontoT.setTitulo(etTituloAlterar.getText().toString());
-        pontoT.setDescricao(etDescricaoAlterar.getText().toString());
-        pontoT.setEndereco(tvEnderecoAlterar.getText().toString());
-        pontoT.setLatitude(Double.parseDouble(tvLatitudeAlterar.getText().toString()));
-        pontoT.setLongitude(Double.parseDouble(tvLongitudeAlterar.getText().toString()));
+                if(bitmap != null){
+                    String base64String = convertToBase64(bitmap);
+                    pontoT.setImagem(base64String);
+                }
 
-        if(bitmap != null){
-            String base64String = convertToBase64(bitmap);
-            pontoT.setImagem(base64String);
+                if(pontoT.getTitulo().isEmpty()){
+                    Toast.makeText( this, "O Título é obrigatório.", Toast.LENGTH_LONG ).show();
+                }else if(pontoT.getEndereco().isEmpty()){
+                    Toast.makeText( this, "O Endereço é obrigatório.\n Utilize o botão Pegar Localização para obter seu endereço.", Toast.LENGTH_LONG ).show();
+                }
+                else if(pontoT.getImagem().isEmpty()){
+                    Toast.makeText( this, "Ter uma imagem é obrigatório.", Toast.LENGTH_LONG ).show();
+                }else{
+                    dao.alterar( pontoT );
+                    Toast.makeText( this, "Registro inserido com sucesso!!!", Toast.LENGTH_LONG ).show();
+                    this.finish();
+                }
+
+            } catch(Exception ex){
+                Toast.makeText( this, "Erro ao alterar", Toast.LENGTH_LONG ).show();
+            }
         }
 
-        dao.alterar(pontoT);
 
-        } catch(Exception ex){
-            Toast.makeText( this, "Erro ao alterar", Toast.LENGTH_LONG ).show();
-        } finally {
-            Toast.makeText( this, "Registro alterado com sucesso!!!", Toast.LENGTH_LONG ).show();
-
-            this.finish();
-        }
 
     }
 
