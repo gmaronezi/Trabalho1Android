@@ -183,31 +183,18 @@ public class CadastroActivity extends AppCompatActivity implements LocationListe
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     public void btTirarFotoOnClick(View view) {
-//        String diretorio = "/Armazenamento Interno/DCIM/Camera/";
-//        File imagem = new File(diretorio + System.currentTimeMillis() + ".jpg");
-//        uri  = Uri.fromFile(imagem);
-
         Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-       // intentCamera.putExtra(MediaStore.EXTRA_OUTPUT, uri);
         startActivityForResult(intentCamera, 1);
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
-
                 foto = (Bitmap) data.getExtras().get("data");
                 ivFoto.setImageBitmap(foto);
-
-                Intent novaIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri);
-                sendBroadcast(novaIntent);
-
-//                caminhoDaImagem = uri.getPath();
-
             }
         }
     }

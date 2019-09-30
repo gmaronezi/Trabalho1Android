@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    tools:context=".AlterarActivity">
+
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="20dp"
-    tools:context=".AlterarActivity">
+    >
 
     <TextView
         android:layout_width="wrap_content"
@@ -62,55 +68,42 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="250dp"
         android:orientation="vertical">
 
         <ImageView
             android:id="@+id/ivFotoAlterar"
-            android:layout_width="164dp"
-            android:layout_height="83dp"
-            android:layout_gravity="center"
-            android:scaleType="center"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
             android:src="@color/cardview_light_background" />
 
     </LinearLayout>
-
-    <LinearLayout
+    <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:textColor="#FFFFFF"
+        android:background="@color/colorAccent"
+        android:text="Pegar Localização"
+        android:layout_gravity="center"
+        android:onClick="btPegarLocalizacaoAlterarOnClick"/>
 
-        <Button
-            android:layout_width="167dp"
-            android:layout_height="wrap_content"
-            android:textColor="#FFFFFF"
-            android:background="@color/colorAccent"
-            android:text="Pegar Localização"
-            android:layout_margin="6dip"
-            android:layout_gravity="center"
-            android:onClick="btPegarLocalizacaoAlterarOnClick"/>
-
-        <Button
-            android:layout_width="167dp"
-            android:layout_height="wrap_content"
-            android:textColor="#FFFFFF"
-            android:background="@color/colorAccent"
-            android:text="Tirar Foto"
-            android:layout_margin="6dip"
-            android:layout_gravity="center"
-            android:onClick="btTirarFotoOnClick"/>
-        <Button
-            android:layout_width="167dp"
-            android:layout_height="wrap_content"
-            android:textColor="#FFFFFF"
-            android:layout_gravity="center"
-            android:background="@color/colorAccent"
-            android:onClick="btAlterarOnclick"
-            android:text="Alterar" />
-
-    </LinearLayout>
-
-
-
+    <Button
+        android:layout_width="371dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="6dip"
+        android:background="@color/colorAccent"
+        android:onClick="btTirarFotoOnClick"
+        android:text="Tirar Foto"
+        android:textColor="#FFFFFF" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#FFFFFF"
+        android:layout_gravity="center"
+        android:background="@color/colorAccent"
+        android:onClick="btAlterarOnclick"
+        android:text="Alterar" />
 
 </LinearLayout>
+</ScrollView>

@@ -130,9 +130,6 @@ public class AlterarActivity extends AppCompatActivity implements LocationListen
         latitude = location.getLatitude();
         longitude = location.getLongitude();
 
-//        tvLatitudeAlterar.setText( String.valueOf( latitude ) );
-//        tvLongitudeAlterar.setText( String.valueOf( longitude ) );
-
     }
 
     @Override
@@ -149,26 +146,6 @@ public class AlterarActivity extends AppCompatActivity implements LocationListen
     public void onProviderDisabled(String provider) {
 
     }
-
-//    @Override
-//    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
-//        // TODO Auto-generated method stub
-//        super.onActivityResult(requestCode, resultCode, data);
-//
-//            Uri selectedImage = data.getData();
-//            String[] filePathColumn = { MediaStore.Images.Media.DATA };
-//
-//            Cursor cursor = getContentResolver().query(selectedImage,
-//                    filePathColumn, null, null, null);
-//            cursor.moveToFirst();
-//
-//            int columnIndex = cursor.getColumnIndex(pontoT.getImagem().toString());
-//            String picturePath = cursor.getString(columnIndex);
-//            cursor.close();
-//
-//            ivFoto.setImageBitmap(BitmapFactory.decodeFile(picturePath));
-//
-//    }
 
     public void btAlterarOnclick(View view) {
         //PontosTuristicos pt = new PontosTuristicos();
@@ -193,8 +170,7 @@ public class AlterarActivity extends AppCompatActivity implements LocationListen
         } finally {
             Toast.makeText( this, "Registro alterado com sucesso!!!", Toast.LENGTH_LONG ).show();
 
-            Intent i = new Intent(this, ListarActivity.class);
-            startActivity(i);
+            this.finish();
         }
 
     }
@@ -234,11 +210,6 @@ public class AlterarActivity extends AppCompatActivity implements LocationListen
             ivFoto.setImageBitmap(bitmap);
         }
 
-//        Intent intent = new Intent();
-//        intent.setAction(Intent.ACTION_VIEW);
-//        intent.setDataAndType(Uri.parse("file:/" + pontoT.getImagem()), "image/*");
-//        startActivity(intent);
-
     }
 
     public void btTirarFotoOnClick(View view) {
@@ -249,13 +220,8 @@ public class AlterarActivity extends AppCompatActivity implements LocationListen
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
-
                 bitmap = (Bitmap) data.getExtras().get("data");
                 ivFoto.setImageBitmap(bitmap);
-
-                Intent novaIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri);
-                sendBroadcast(novaIntent);
-
             }
         }
     }

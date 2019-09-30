@@ -23,7 +23,7 @@ public class ListarActivity extends AppCompatActivity implements AdapterView.OnI
     ListView lvRegistros;
     Intent i;
     Cursor registros;
-    private Long teste;
+    private Long idRegistro;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,56 +35,63 @@ public class ListarActivity extends AppCompatActivity implements AdapterView.OnI
 
         registros = dao.listar();
 
-        lvRegistros = (ListView) findViewById(R.id.lvLista);
+        lvRegistros = findViewById(R.id.lvLista);
 
         adapter = new Adapter( this, registros );
 
         lvRegistros.setAdapter( adapter );
 
         lvRegistros.setOnItemClickListener(this);
+    }
 
-
-
+    @Override
+    public void onResume(){
+        refreshLista();
+        super.onResume();
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
         registros = (Cursor) adapter.getItem(position);
-        int teste = registros.getInt(registros.getColumnIndex("_id"));
+        int idRegistro = registros.getInt(registros.getColumnIndex("_id"));
 
         i = new Intent(this, AlterarActivity.class);
-         i.putExtra("id", teste);
+         i.putExtra("id", idRegistro);
         startActivity(i);
     }
 
     public void btEditarOnClick(View view) {
-        teste = adapter.getItemId(lvRegistros.getPositionForView(view));
+        idRegistro = adapter.getItemId(lvRegistros.getPositionForView(view));
         i = new Intent(this, AlterarActivity.class);
-        i.putExtra("id", teste);
+        i.putExtra("id", idRegistro);
         startActivity(i);
     }
 
     public void btVerMapaOnClick(View view) {
-        teste = adapter.getItemId(lvRegistros.getPositionForView(view));
+        idRegistro = adapter.getItemId(lvRegistros.getPositionForView(view));
         Intent intent = new Intent(this, MapsActivity.class);
-        intent.putExtra("id",teste);
+        intent.putExtra("id",idRegistro);
         startActivity(intent);
     }
 
     public void btExcluirOnclick(View view) {
         try{
-            teste = adapter.getItemId(lvRegistros.getPositionForView(view));
-            dao.excluir(String.valueOf(teste));
+            idRegistro = adapter.getItemId(lvRegistros.getPositionForView(view));
+            dao.excluir(String.valueOf(idRegistro));
         }
         catch(Exception ex){
             Toast.makeText( this, "Erro ao excluir", Toast.LENGTH_LONG ).show();
         } finally {
             Toast.makeText( this, "Registro excluído com sucesso!!!", Toast.LENGTH_LONG ).show();
 
-            registros = dao.listar();
-            adapter = new Adapter( this, registros );
-            lvRegistros.setAdapter( adapter );
+            refreshLista();
         }
+    }
+
+    public void refreshLista(){
+        registros = dao.listar();
+        adapter = new Adapter( this, registros );
+        lvRegistros.setAdapter( adapter );
     }
 }
