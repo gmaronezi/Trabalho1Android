@@ -136,9 +136,7 @@ public class CadastroActivity extends AppCompatActivity implements LocationListe
             }else if(pt.getEndereco().isEmpty()){
                 Toast.makeText( this, "O Endereço é obrigatório.\n Utilize o botão Pegar Localização para obter seu endereço.", Toast.LENGTH_LONG ).show();
             }
-            else if(pt.getImagem().isEmpty()){
-                Toast.makeText( this, "Ter uma imagem é obrigatório.", Toast.LENGTH_LONG ).show();
-            }else{
+            else{
                 dao.incluir( pt );
                 Toast.makeText( this, "Registro inserido com sucesso!!!", Toast.LENGTH_LONG ).show();
                 this.finish();
