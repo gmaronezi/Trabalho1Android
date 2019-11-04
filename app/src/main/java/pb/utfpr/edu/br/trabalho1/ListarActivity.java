@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -16,7 +17,7 @@ import pb.utfpr.edu.br.trabalho1.dao.DatabaseHandler;
 
 public class ListarActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
-    private Button btEditarLista;
+    private ImageButton btEditarLista;
 
     private DatabaseHandler dao;
     Adapter adapter;
@@ -93,5 +94,9 @@ public class ListarActivity extends AppCompatActivity implements AdapterView.OnI
         registros = dao.listar();
         adapter = new Adapter( this, registros );
         lvRegistros.setAdapter( adapter );
+    }
+
+    public void btClimaOnClick(View view) {
+
     }
 }

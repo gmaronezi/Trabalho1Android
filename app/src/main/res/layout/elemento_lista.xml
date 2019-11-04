@@ -121,6 +121,22 @@
             app:layout_constraintRight_toRightOf="parent"
             android:text="Map" />
 
+        <ImageButton
+            android:id="@+id/btClima"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/circle"
+            android:onClick="btClimaOnClick"
+            android:gravity="center"
+            android:src="@drawable/ic_wb_sunny_black_24dp"
+            android:layout_margin="10dp"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:text="Map" />
+
     </LinearLayout>
 
 
