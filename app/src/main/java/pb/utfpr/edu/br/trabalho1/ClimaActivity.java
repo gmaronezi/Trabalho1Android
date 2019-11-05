@@ -30,6 +30,12 @@ public class ClimaActivity extends AppCompatActivity {
     private String URLline = "";
 
     private String temperatura, data, hora, descricao, turno, cidade, umidade, velocVento, horaAmanhacer, horaPorDoSol;
+    private String dataFutura[] = new String[4];
+    private String diaFuturo[] = new String[4];
+    private String tempMaxima[] = new String[4];
+    private String tempMinima[] = new String[4];
+    private String descDiasFuturos[] = new String[4];
+    private String condicaoDiasFuturos[] = new String[4];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +94,7 @@ public class ClimaActivity extends AppCompatActivity {
 
                 JSONObject dataObject = jsonObject.getJSONObject("results");
 
+                    //pega dados do dia atual
                     temperatura = dataObject.getString("temp");
                     data = dataObject.getString("date");
                     hora = dataObject.getString("time");
@@ -98,6 +105,17 @@ public class ClimaActivity extends AppCompatActivity {
                     velocVento = dataObject.getString("wind_speedy");
                     horaAmanhacer = dataObject.getString("sunrise");
                     horaPorDoSol = dataObject.getString("sunset");
+
+                JSONArray dataArray = dataObject.getJSONArray("forecast");
+                for (int i = 0; i < dataArray.length()-6; i++) { //pega os valores dos próximos 3 dias mais o dia atual
+                    JSONObject dataObj = dataArray.getJSONObject(i);
+                    dataFutura[i] = dataObj.getString("date");
+                    diaFuturo[i] = dataObj.getString("weekday");
+                    tempMaxima[i] = dataObj.getString("max");
+                    tempMinima[i] = dataObj.getString("min");
+                    descDiasFuturos[i] = dataObj.getString("description");
+                    condicaoDiasFuturos[i] = dataObj.getString("condition");
+                }
             }
 
         } catch (JSONException e) {
