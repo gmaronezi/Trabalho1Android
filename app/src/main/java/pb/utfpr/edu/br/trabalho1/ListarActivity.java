@@ -97,6 +97,9 @@ public class ListarActivity extends AppCompatActivity implements AdapterView.OnI
     }
 
     public void btClimaOnClick(View view) {
-
+        idRegistro = adapter.getItemId(lvRegistros.getPositionForView(view));
+        Intent intent = new Intent(this, ClimaActivity.class);
+        intent.putExtra("id",idRegistro);
+        startActivity(intent);
     }
 }

@@ -85,21 +85,6 @@ public class Adapter extends BaseAdapter {
             ivFoto.setImageBitmap(bitmap);
         }
 
-//        if(foto != null){
-//            File imgFile = new  File("/storage/emulated/0/DCIM/Camera/IMG_20190825_205338.jpg");
-//
-//           if(imgFile.exists()){
-//
-////               Uri imgUri = Uri.parse(
-////                       "/storage/emulated/0/DCIM/Camera/IMG_20190825_205338.jpg" );
-////               ivFoto.setImageURI(imgUri);
-//                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-//
-//                ivFoto.setImageBitmap(myBitmap);
-//            }
-//        }
-
-
         return v;
     }
 

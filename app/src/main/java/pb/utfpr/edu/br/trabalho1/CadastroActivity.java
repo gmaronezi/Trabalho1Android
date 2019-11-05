@@ -184,9 +184,9 @@ public class CadastroActivity extends AppCompatActivity implements LocationListe
             geocoder = new Geocoder(this, Locale.getDefault());
 
             try {
-                addresses = geocoder.getFromLocation(latitude, longitude, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+                addresses = geocoder.getFromLocation(latitude, longitude, 1);
 
-                String address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
+                String address = addresses.get(0).getAddressLine(0);
 
                 tvLatitude.setText( String.valueOf( latitude ) );
                 tvLongitude.setText( String.valueOf( longitude ));
